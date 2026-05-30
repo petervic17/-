@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a5f4a">
+  <meta name="description" content="個人行程管理：每日事項、記事本、行事曆、長期目標">
+  <title>我的生活管理</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title" id="pageTitle">每日事項</h1>
+    <button type="button" class="btn-icon btn-add" id="btnAdd" aria-label="新增" title="新增">＋</button>
+  </header>
+
+  <main class="app-main">
+    <!-- 每日事項 -->
+    <section class="panel active" id="panel-daily" data-panel="daily">
+      <div class="date-bar">
+        <button type="button" class="btn-icon" id="dailyPrevDay" aria-label="前一天">‹</button>
+        <input type="date" id="dailyDate" class="date-input">
+        <button type="button" class="btn-icon" id="dailyNextDay" aria-label="後一天">›</button>
+        <button type="button" class="btn-text" id="dailyToday">今天</button>
+      </div>
+      <p class="hint" id="dailyHint"></p>
+      <ul class="list" id="dailyList"></ul>
+      <p class="empty-state" id="dailyEmpty">這天還沒有事項，點右上角 ＋ 新增</p>
+    </section>
+
+    <!-- 記事本 -->
+    <section class="panel" id="panel-notes" data-panel="notes">
+      <div class="search-bar">
+        <input type="search" id="noteSearch" placeholder="搜尋記事…" autocomplete="off">
+      </div>
+      <ul class="list list-notes" id="notesList"></ul>
+      <p class="empty-state" id="notesEmpty">還沒有記事，點右上角 ＋ 建立</p>
+    </section>
+
+    <!-- 行事曆 -->
+    <section class="panel" id="panel-calendar" data-panel="calendar">
+      <div class="cal-nav">
+        <button type="button" class="btn-icon" id="calPrevMonth" aria-label="上個月">‹</button>
+        <span class="cal-month-label" id="calMonthLabel"></span>
+        <button type="button" class="btn-icon" id="calNextMonth" aria-label="下個月">›</button>
+        <button type="button" class="btn-text" id="calToday">今天</button>
+      </div>
+      <div class="cal-weekdays">
+        <span class="cal-wd-red">日</span><span>一</span><span>二</span><span>三</span>
+        <span>四</span><span>五</span><span class="cal-wd-red">六</span>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-day-detail" id="calDayDetail" hidden>
+        <h2 class="cal-day-title" id="calDayTitle"></h2>
+        <p class="cal-holiday-banner" id="calHolidayBanner" hidden></p>
+        <ul class="list" id="calEventList"></ul>
+        <p class="empty-state" id="calEmpty">這天沒有行程</p>
+      </div>
+    </section>
+
+    <!-- 長期目標 -->
+    <section class="panel" id="panel-goals" data-panel="goals">
+      <ul class="list list-goals" id="goalsList"></ul>
+      <p class="empty-state" id="goalsEmpty">還沒有目標，點右上角 ＋ 設定長期目標</p>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="主要功能">
+    <button type="button" class="nav-item active" data-tab="daily">
+      <span class="nav-icon">☑</span>
+      <span class="nav-label">每日</span>
+    </button>
+    <button type="button" class="nav-item" data-tab="notes">
+      <span class="nav-icon">📝</span>
+      <span class="nav-label">記事</span>
+    </button>
+    <button type="button" class="nav-item" data-tab="calendar">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">行事曆</span>
+    </button>
+    <button type="button" class="nav-item" data-tab="goals">
+      <span class="nav-icon">🎯</span>
+      <span class="nav-label">目標</span>
+    </button>
+  </nav>
+
+  <!-- 通用對話框 -->
+  <dialog class="modal" id="modal">
+    <form class="modal-form" id="modalForm" method="dialog">
+      <header class="modal-header">
+        <h2 id="modalTitle">新增</h2>
+        <button type="button" class="btn-icon modal-close" id="modalClose" aria-label="關閉">×</button>
+      </header>
+      <div class="modal-body" id="modalBody"></div>
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-danger" id="modalDelete" hidden>刪除</button>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="modalCancel">取消</button>
+          <button type="submit" class="btn btn-primary">儲存</button>
+        </div>
+      </footer>
+    </form>
+  </dialog>
+
+  <script src="js/storage.js"></script>
+  <script src="js/holidays.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/daily.js"></script>
+  <script src="js/notes.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/goals.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
